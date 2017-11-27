@@ -21,6 +21,7 @@
 #include <cpprest\http_client.h>
 
 
+typedef utility::string_t str;
 
 
 

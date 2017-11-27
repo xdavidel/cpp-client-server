@@ -2,46 +2,67 @@
 
 using namespace web::http;
 
-Client::Client()
+Client::HttpClient::HttpClient(str address, str port)
+	: m_baseAddress(address.append(port))
 {
+	m_menu.emplace(std::make_pair(1, MenuItem(L"Get Active Users")));
+	m_menu.emplace(std::make_pair(2, MenuItem(L"Send Private Message")));
+	m_menu.emplace(std::make_pair(3, MenuItem(L"Send Group Message")));
+	m_menu.emplace(std::make_pair(4, MenuItem(L"Ban User")));
+	m_menu.emplace(std::make_pair(5, MenuItem(L"Unban User")));
+	m_menu.emplace(std::make_pair(6, MenuItem(L"Get Pending Messages")));
+	m_menu.emplace(std::make_pair(0, MenuItem(L"Exit")));
+
 }
 
 
-Client::~Client()
+Client::HttpClient::~HttpClient()
 {
 }
 
-bool Client::Login(utility::string_t username, utility::string_t password)
+bool Client::HttpClient::Login(str username, str password)
+{
+	return true;
+}
+
+str Client::HttpClient::GetActiveUsers()
+{
+	return str();
+}
+
+str Client::HttpClient::GetMessage(str fromUser)
+{
+	return str();
+}
+
+bool Client::HttpClient::Send(str fromUser, str toUser, str message)
 {
 	return false;
 }
 
-utility::string_t Client::GetActiveUsers()
-{
-	return utility::string_t();
-}
-
-utility::string_t Client::GetMessage(utility::string_t fromUser)
-{
-	return utility::string_t();
-}
-
-bool Client::Send(utility::string_t fromUser, utility::string_t toUser, utility::string_t message)
+bool Client::HttpClient::SendAll()
 {
 	return false;
 }
 
-bool Client::SendAll()
+bool Client::HttpClient::Ban(str username)
 {
 	return false;
 }
 
-bool Client::Ban(utility::string_t username)
+bool Client::HttpClient::Unban(str username)
 {
 	return false;
 }
 
-bool Client::Unban(utility::string_t username)
+void Client::HttpClient::PrintMenu()
 {
-	return false;
+	std::cout << "Menu" << std::endl;
+	std::cout << "----------------------------" << std::endl;
+
+	for(auto it = m_menu.begin(); it != m_menu.end(); it++)
+	{
+		std::cout << it->first;
+		it->second.Display();
+	}
 }

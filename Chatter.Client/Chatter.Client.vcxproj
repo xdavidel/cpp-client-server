@@ -156,11 +156,13 @@
   <ItemGroup>
     <ClInclude Include="app\stdafx.h" />
     <ClInclude Include="client\Client.h" />
+    <ClInclude Include="menu\MenuItem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\ClientApp.cpp" />
     <ClCompile Include="app\stdafx.cpp" />
     <ClCompile Include="client\Client.cpp" />
+    <ClCompile Include="menu\MenuItem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
