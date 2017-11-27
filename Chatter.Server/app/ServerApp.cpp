@@ -48,7 +48,7 @@ void ShutdownServer()
 	return;
 }
 
-inline void WaitForExit()
+inline void PromptExit()
 {
 	cout << "Press ENTER to exit..." << std::endl;
 	string line;
@@ -64,7 +64,7 @@ int wmain( int argc, wchar_t * argv[] )
 
 	InitializeServer(address);
 	
-	WaitForExit();
+	PromptExit();
 
 	ShutdownServer();
 	return 0;

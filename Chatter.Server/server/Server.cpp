@@ -6,13 +6,13 @@ Server::HttpController::HttpController(utility::string_t url, unordered_map<util
 {
 	m_listener.support(methods::POST, bind(&Server::HttpController::HttpPost, this, placeholders::_1));
 
-	m_routes[L"/login"] = std::bind(&Server::HttpController::HandleLogin, this, placeholders::_1);
-	m_routes[L"/getActiveUser"] = std::bind(&Server::HttpController::HandleGetActiveUser, this, placeholders::_1);
-	m_routes[L"/sendMessage"] = std::bind(&Server::HttpController::HandleSendMessages, this, placeholders::_1);
-	m_routes[L"/getMessage"] = std::bind(&Server::HttpController::HandleGetMessages, this, placeholders::_1);
-	m_routes[L"/sendToAllUsers"] = std::bind(&Server::HttpController::HandleSendToAllUsers, this, placeholders::_1);
-	m_routes[L"/banAUser"] = std::bind(&Server::HttpController::HandleBanUser, this, placeholders::_1);
-	m_routes[L"/unbanAUser"] = std::bind(&Server::HttpController::HandleUnBanUser, this, placeholders::_1);
+	m_routes.emplace(std::make_pair(L"/login", std::bind(&Server::HttpController::HandleLogin, this, placeholders::_1)));
+	m_routes.emplace(std::make_pair(L"/getActiveUser", std::bind(&Server::HttpController::HandleGetActiveUser, this, placeholders::_1)));
+	m_routes.emplace(std::make_pair(L"/sendMessage", std::bind(&Server::HttpController::HandleSendMessages, this, placeholders::_1)));
+	m_routes.emplace(std::make_pair(L"/getMessage", std::bind(&Server::HttpController::HandleGetMessages, this, placeholders::_1)));
+	m_routes.emplace(std::make_pair(L"/sendToAllUsers", std::bind(&Server::HttpController::HandleSendToAllUsers, this, placeholders::_1)));
+	m_routes.emplace(std::make_pair(L"/banAUser", std::bind(&Server::HttpController::HandleBanUser, this, placeholders::_1)));
+	m_routes.emplace(std::make_pair(L"/unbanAUser", std::bind(&Server::HttpController::HandleUnBanUser, this, placeholders::_1)));
 
 }
 
