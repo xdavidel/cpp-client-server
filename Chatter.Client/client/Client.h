@@ -6,21 +6,21 @@ using namespace std;
 class Client
 {
 private:
-	const String SERVER = L"server";
+	const utility::string_t SERVER = L"server";
 	const int PORT = 1234;
 
-	String m_username;
-	String m_password;
+	utility::string_t m_username;
+	utility::string_t m_password;
 public:
 	Client();
 	~Client();
 
-	bool Login(String username, String password);	// login?username=<username>&password=<password>
-	String GetActiveUsers();	// getActiveUser
-	String GetMessage(String fromUser);	// getMessages?username=<username>
-	bool Send(String fromUser, String toUser, String message);	// send?username=<username>&massege=<massege>
+	bool Login(utility::string_t username, utility::string_t password);	// login?username=<username>&password=<password>
+	utility::string_t GetActiveUsers();	// getActiveUser
+	utility::string_t GetMessage(utility::string_t fromUser);	// getMessages?username=<username>
+	bool Send(utility::string_t fromUser, utility::string_t toUser, utility::string_t message);	// send?username=<username>&massege=<massege>
 	bool SendAll();	// sendAll?username=<username>&massege=<massege>
-	bool Ban(String username);		// banUser
-	bool Unban(String username);	// unbanUser
+	bool Ban(utility::string_t username);		// banUser
+	bool Unban(utility::string_t username);	// unbanUser
 };
 

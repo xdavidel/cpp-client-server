@@ -11,22 +11,22 @@ Client::~Client()
 {
 }
 
-bool Client::Login(String username, String password)
+bool Client::Login(utility::string_t username, utility::string_t password)
 {
 	return false;
 }
 
-String Client::GetActiveUsers()
+utility::string_t Client::GetActiveUsers()
 {
-	return String();
+	return utility::string_t();
 }
 
-String Client::GetMessage(String fromUser)
+utility::string_t Client::GetMessage(utility::string_t fromUser)
 {
-	return String();
+	return utility::string_t();
 }
 
-bool Client::Send(String fromUser, String toUser, String message)
+bool Client::Send(utility::string_t fromUser, utility::string_t toUser, utility::string_t message)
 {
 	return false;
 }
@@ -36,12 +36,12 @@ bool Client::SendAll()
 	return false;
 }
 
-bool Client::Ban(String username)
+bool Client::Ban(utility::string_t username)
 {
 	return false;
 }
 
-bool Client::Unban(String username)
+bool Client::Unban(utility::string_t username)
 {
 	return false;
 }

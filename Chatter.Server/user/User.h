@@ -10,20 +10,20 @@ namespace Server
 	{
 	public:
 		User();
-		User(String, String);
+		User(utility::string_t, utility::string_t);
 		~User();
 
-		bool SetPassword(String);
-		String GetUsername() const;
-		Vector<String> GetBannedUsers() const;
-		void AddBannedUser(String username);
-		void RemoveBannedUser(String username);
-		bool IsBanned(String username);
+		bool SetPassword(utility::string_t);
+		utility::string_t GetUsername() const;
+		std::vector<utility::string_t> GetBannedUsers() const;
+		void AddBannedUser(utility::string_t username);
+		void RemoveBannedUser(utility::string_t username);
+		bool IsBanned(utility::string_t username);
 
 	private:
-		String m_name;
-		String m_pass;
-		Vector<String> m_bannedUserList;
+		utility::string_t m_name;
+		utility::string_t m_pass;
+		std::vector<utility::string_t> m_bannedUserList;
 	};
 }
 

@@ -3,38 +3,38 @@
 Server::User::User()
 {}
 
-Server::User::User(String username, String password)
+Server::User::User(utility::string_t username, utility::string_t password)
 	: m_name(username), m_pass(password)
 {}
 
 Server::User::~User()
 {}
 
-bool Server::User::SetPassword(String newPassword)
+bool Server::User::SetPassword(utility::string_t newPassword)
 {
 	// Todo: check for password restrictions
 	this->m_pass.assign(newPassword);
 	return true;
 }
 
-String Server::User::GetUsername() const
+utility::string_t Server::User::GetUsername() const
 {
 	return m_name;
 }
 
-Vector<String> Server::User::GetBannedUsers() const
+std::vector<utility::string_t> Server::User::GetBannedUsers() const
 {
-	return Vector<String>();
+	return std::vector<utility::string_t>();
 }
 
-void Server::User::AddBannedUser(String username)
+void Server::User::AddBannedUser(utility::string_t username)
 {
 	this->m_bannedUserList.push_back(username);
 }
 
-void Server::User::RemoveBannedUser(String username)
+void Server::User::RemoveBannedUser(utility::string_t username)
 {
-	Vector<size_t> indexesToDelete;
+	std::vector<size_t> indexesToDelete;
 
 	for(size_t i = 0; i < this->m_bannedUserList.size(); i++)
 	{
@@ -50,7 +50,7 @@ void Server::User::RemoveBannedUser(String username)
 	}
 }
 
-bool Server::User::IsBanned(String username)
+bool Server::User::IsBanned(utility::string_t username)
 {
 	for(size_t i = 0; i < this->m_bannedUserList.size(); i++)
 	{

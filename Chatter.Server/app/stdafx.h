@@ -5,8 +5,6 @@
 
 #pragma once
 
-#define String utility::string_t 
-#define Vector std::vector 
 
 #include <iostream>
 #include <tchar.h>
@@ -17,15 +15,10 @@
 #include <stdio.h>
 
 // cpprestsdk
-#include <cpprest\http_listener.h>
-#include <cpprest\json.h>
-#include <cpprest\uri.h>
-#include <cpprest\asyncrt_utils.h>
-#include <cpprest\http_client.h>
-
-
-
-
-
+#include <cpprest/http_listener.h>
+#include <cpprest/json.h>
+#include <cpprest/uri.h>
+#include <cpprest/asyncrt_utils.h>
+#include <cpprest/http_client.h>
 
 // TODO: reference additional headers your program requires here
