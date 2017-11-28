@@ -12,7 +12,6 @@ Client::HttpClient::HttpClient(str address, str port)
 	m_menu.emplace(std::make_pair(5, MenuItem(L"Unban User")));
 	m_menu.emplace(std::make_pair(6, MenuItem(L"Get Pending Messages")));
 	m_menu.emplace(std::make_pair(0, MenuItem(L"Exit")));
-
 }
 
 
@@ -22,12 +21,38 @@ Client::HttpClient::~HttpClient()
 
 bool Client::HttpClient::Login(str username, str password)
 {
-	return true;
+	// create post parameters for the body (as json). 
+	web::json::value postParameters;
+
+	postParameters[L"username"] = web::json::value(username);
+	postParameters[L"password"] = web::json::value(password);
+
+	auto response = HttpPostRequest(L"/login", postParameters);
+
+	if(response.status_code() == status_codes::OK)
+	{
+		return true;
+	}
+
+	return false;
 }
 
-str Client::HttpClient::GetActiveUsers()
+vector<str> Client::HttpClient::GetActiveUsers()
 {
-	return str();
+	vector<str> users;
+
+	web::json::value postParameters;
+
+	auto response = HttpPostRequest(L"/getActiveUser", postParameters);
+
+	if(response.status_code() == status_codes::OK)
+	{
+		auto content = response.extract_json();
+		auto body = content.get();
+	}
+
+
+	return users;
 }
 
 str Client::HttpClient::GetMessage(str fromUser)
@@ -53,6 +78,26 @@ bool Client::HttpClient::Ban(str username)
 bool Client::HttpClient::Unban(str username)
 {
 	return false;
+}
+
+http_response Client::HttpClient::HttpPostRequest(str path, web::json::value data)
+{
+	auto fullpath = m_baseAddress + path;
+
+	web::http::http_request postRequest(web::http::methods::POST);
+	postRequest.headers().add(L"Content-Type", L"application/json");
+	postRequest.headers().add(L"X-Requested-With", L"XMLHttpRequest");
+
+	postRequest.set_body(data);
+
+	http_response retVal;
+
+	web::http::client::http_client client(fullpath);
+	client.request(postRequest).then([&](http_response response){
+		retVal = response;
+	}).wait();
+
+	return retVal;
 }
 
 void Client::HttpClient::PrintMenu()

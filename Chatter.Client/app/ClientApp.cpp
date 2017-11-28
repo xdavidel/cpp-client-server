@@ -5,21 +5,12 @@
 const str DEFAULT_PORT = L"34568";
 const str LOCAL_HOST = U("http://localhost:");
 
-inline void PromptExit(std::string message)
-{
-	std::cin.clear();
-	std::cin.ignore(INT_MAX);
-	std::cout << message << std::endl;
-	std::string line;
-	getline(std::cin, line);
-}
-
-inline void Input(str message, str& value)
+template<typename T>
+inline void Input(str message, T& value)
 {
 	std::wcout << message;
 	wcin >> value;
 }
-
 
 
 int wmain(int argc, wchar_t * argv[])
@@ -44,6 +35,25 @@ int wmain(int argc, wchar_t * argv[])
 		
 	} while(!connected);
 
-	
+
+	auto choice = -1;
+	do
+	{
+		system("cls");
+		client.PrintMenu();
+		Input(L"Select an option: ", choice);
+
+		switch(choice)
+		{
+			case 1:
+				client.GetActiveUsers();
+				
+				break;
+			default:
+				break;
+		}
+		system("pause");
+	} while(choice != 0);
+
 	return 0;
 }
