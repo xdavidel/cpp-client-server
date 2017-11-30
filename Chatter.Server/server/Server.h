@@ -1,15 +1,16 @@
 #pragma once
 #include "../app/stdafx.h"
 
-#include "../message/Message.h"
-#include "../user/User.h"
+#include "../../Chatter.Entities/message/Message.h"
+#include "../../Chatter.Entities/user/User.h"
 
 using namespace web;
 using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
-using namespace Server;
 using namespace std;
+
+using namespace Entities;
 
 #define Vector std::vector
 #define Task pplx::task

@@ -40,7 +40,7 @@ void Server::HttpController::HandleLogin(http_request request)
 			username = body[L"username"];
 			password = body[L"password"];
 		}).wait();
-		m_usersList[username.as_string()] = std::unique_ptr<Server::User>(new Server::User(username.as_string(), password.as_string()));
+		m_usersList[username.as_string()] = std::unique_ptr<User>(new User(username.as_string(), password.as_string()));
 
 		retVal[L"message"] = web::json::value(L"User Logged In");
 		request.reply(status_codes::OK, retVal);
@@ -58,14 +58,13 @@ void Server::HttpController::HandleGetActiveUser(http_request request)
 {
 	try
 	{
-		web::json::value arr;
-		std::vector<web::json::value> users;
+		Vector<web::json::value> users;
 		for(auto it = m_usersList.begin(); it != m_usersList.end(); it++)
 		{
-			arr[it->first] = web::json::value(it->second->GetUsername());
+			users.push_back(web::json::value(it->second->GetUsername()));
 		}
 
-		request.reply(status_codes::OK, arr);
+		request.reply(status_codes::OK, web::json::value::array(users));
 	}
 	catch(...)
 	{

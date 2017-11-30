@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "../server/Server.h"
-#include "../message/Message.h"
-#include "../user/User.h"
+#include "../../Chatter.Entities/message/Message.h"
+#include "../../Chatter.Entities/user/User.h"
 
 const string_t DEFAULT_PORT = L"34568";
 const Vector<string_t> g_urls

@@ -1,4 +1,5 @@
 #include "Client.h"
+#include "../../Chatter.Entities/user/User.h"
 
 using namespace web::http;
 
@@ -21,11 +22,14 @@ Client::HttpClient::~HttpClient()
 
 bool Client::HttpClient::Login(str username, str password)
 {
+	Entities::User user(username, password);
+	
 	// create post parameters for the body (as json). 
-	web::json::value postParameters;
+	web::json::value postParameters = user.Serialize();
+	//web::json::value postParameters;
 
-	postParameters[L"username"] = web::json::value(username);
-	postParameters[L"password"] = web::json::value(password);
+	/*postParameters[L"username"] = web::json::value(username);
+	postParameters[L"password"] = web::json::value(password);*/
 
 	auto response = HttpPostRequest(L"/login", postParameters);
 
@@ -43,14 +47,22 @@ vector<str> Client::HttpClient::GetActiveUsers()
 
 	web::json::value postParameters;
 
+	web::json::value arr = web::json::value::array();
+	arr[0] = web::json::value(L"moshe");
+
 	auto response = HttpPostRequest(L"/getActiveUser", postParameters);
 
 	if(response.status_code() == status_codes::OK)
 	{
-		auto content = response.extract_json();
-		auto body = content.get();
+		auto content = response.extract_json().get();
+		auto bodyArr = content.as_array();
+		
+		for(auto iter = bodyArr.begin(); iter != bodyArr.end(); ++iter)
+		{
+			auto& user = *iter;
+			users.push_back(user.as_string());
+		}
 	}
-
 
 	return users;
 }

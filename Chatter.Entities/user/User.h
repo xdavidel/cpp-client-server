@@ -1,7 +1,7 @@
 #pragma once
 #include "../app/stdafx.h"
 
-namespace Server
+namespace Entities
 {
 	/**
 	Contains user details and bun list of usernames 
@@ -19,6 +19,9 @@ namespace Server
 		void AddBannedUser(utility::string_t username);
 		void RemoveBannedUser(utility::string_t username);
 		bool IsBanned(utility::string_t username);
+
+		web::json::value Serialize();
+		static User Deserialize(web::json::value user);
 
 	private:
 		utility::string_t m_name;

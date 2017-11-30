@@ -156,16 +156,17 @@
   <ItemGroup>
     <ClInclude Include="app\Helpers.h" />
     <ClInclude Include="app\stdafx.h" />
-    <ClInclude Include="message\Message.h" />
     <ClInclude Include="server\Server.h" />
-    <ClInclude Include="user\User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\ServerApp.cpp" />
     <ClCompile Include="app\stdafx.cpp" />
-    <ClCompile Include="message\Message.cpp" />
     <ClCompile Include="server\Server.cpp" />
-    <ClCompile Include="user\User.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chatter.Entities\Chatter.Entities.vcxproj">
+      <Project>{c1dbf751-c486-4960-acc1-4fd3c1fb3f2c}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
